@@ -20,7 +20,6 @@ export default function Header() {
         </div>
       </div>
       <div className="header-main">
-        <button className="hamburger" onClick={() => setDrawer(true)} aria-label="Open menu">☰</button>
         <Link href="/" className="logo-link">
           <LogoMark />
           <span>
@@ -32,7 +31,12 @@ export default function Header() {
           <input value={q} onChange={(e) => setQ(e.target.value)} name="q" placeholder="Search books — try durood, sarf, quran…" aria-label="Search books" />
           <button type="submit">Search</button>
         </form>
-        <Link className="mobile-cart" href="/cart" aria-label={`Cart, ${cartCount} items`}>🛒<span className="pill-count">{cartCount}</span></Link>
+        <div className="mobile-icons">
+          <button className="icon-btn" onClick={() => setDrawer(true)} aria-label="Open menu">☰</button>
+          <Link className="icon-btn" href="/cart" aria-label={`Cart, ${cartCount} items`}>🛒<span className="pill-count"> {cartCount}</span></Link>
+          <span className="icon-btn" title="Wishlist items" aria-label={`Wishlist, ${wishlist.length} items`}>♡<span className="pill-count">{wishlist.length}</span></span>
+          <Link className="icon-btn" href="/admin" aria-label="Account">👤</Link>
+        </div>
         <nav className="header-cta" aria-label="Account and cart">
           <Link className="pill" href="/shop">Shop</Link>
           <Link className="pill" href="/cart">🛒 Cart <span className="pill-count">{cartCount}</span></Link>
@@ -64,6 +68,10 @@ export default function Header() {
               <span className="footer-brand">Maktaba <em>Noor-ul-Ilm</em></span>
               <button className="drawer-close" onClick={() => setDrawer(false)} aria-label="Close menu">✕</button>
             </div>
+            <form className="drawer-search" action="/shop" method="get" onSubmit={(e) => { if (!q.trim()) e.preventDefault(); }}>
+              <input value={q} onChange={(e) => setQ(e.target.value)} name="q" placeholder="Search books…" aria-label="Search books" />
+              <button type="submit">Search</button>
+            </form>
             <nav className="drawer-links">
               <Link href="/" onClick={() => setDrawer(false)}>Home</Link>
               <Link href="/shop" onClick={() => setDrawer(false)}>All Books</Link>

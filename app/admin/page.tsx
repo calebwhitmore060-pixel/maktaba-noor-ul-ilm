@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { getSupabase, isSupabaseConfigured, setupMessage } from "../../lib/supabase";
+import { formatRs } from "../../lib/store";
 
 const STATUSES = ["Pending", "Confirmed", "Processing", "Shipped", "Delivered", "Cancelled", "Returned", "Refunded"];
 
@@ -48,11 +49,11 @@ export default function Admin() {
       <p>Signed in as {user.email}</p>
       {msg && <p style={{ color: "#a00" }}>{msg}</p>}
       <div className="table-card"><h2 style={{ marginTop: 0, color: "#123D32" }}>Products ({products.length})</h2>
-      <ul>{products.map((p) => <li key={p.id}>{p.name} — Rs {p.price} ({p.category_id})</li>)}</ul>
+      <ul>{products.map((p) => <li key={p.id}>{p.name} — {formatRs(p.price)} ({p.category_id})</li>)}</ul>
       </div><div className="table-card"><h2 style={{ marginTop: 0, color: "#123D32" }}>Orders ({orders.length})</h2>
       {orders.map((o) => (
         <div key={o.id} style={{ borderBottom: "1px solid #eee", padding: "8px 0" }}>
-          <strong>{o.customer_name}</strong> · {o.phone} · {o.city} · Rs {o.total} ·
+          <strong>{o.customer_name}</strong> · {o.phone} · {o.city} · {formatRs(o.total)} ·
           <select value={o.status} onChange={(e) => updateStatus(o.id, e.target.value)} style={{ marginLeft: 8 }}>
             {STATUSES.map((s) => <option key={s}>{s}</option>)}
           </select>

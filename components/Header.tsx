@@ -14,9 +14,13 @@ export default function Header() {
     <header className="site-header">
       <div className="topbar">
         <div className="topbar-inner">
+          <span>FOR ORDERS INFO CALL / WHATSAPP +92-307 5722464</span>
           <span>Cash on Delivery across Pakistan</span>
-          <span>Order on WhatsApp: <a href="https://wa.me/923075722464">0307-5722464</a></span>
-          <span>Authentic books · Fair prices</span>
+          <span className="topbar-social">
+            <a href="https://www.facebook.com/onlinebooks8076">Facebook</a>
+            {" · "}
+            <a href="https://instagram.com/maktabanoorulilm">Instagram</a>
+          </span>
         </div>
       </div>
       <div className="header-main">
@@ -27,32 +31,33 @@ export default function Header() {
             <span className="brand-tag">Islamic Bookstore · Lahore</span>
           </span>
         </Link>
-        <form className="search" action="/shop" method="get" onSubmit={(e) => { if (!q.trim()) e.preventDefault(); }}>
-          <input value={q} onChange={(e) => setQ(e.target.value)} name="q" placeholder="Search books — try durood, sarf, quran…" aria-label="Search books" />
-          <button type="submit">Search</button>
+        <form className="search" action="/shop" method="get">
+          <input value={q} onChange={(e) => setQ(e.target.value)} name="q" placeholder="Search Products" aria-label="Search products" />
+          <select name="cat" aria-label="All Categories" defaultValue="">
+            <option value="">All Categories</option>
+            {CATEGORIES.map((c) => (
+              <option key={c.id} value={c.slug}>{c.name}</option>
+            ))}
+          </select>
+          <button type="submit" aria-label="Search">🔍</button>
         </form>
         <div className="mobile-icons">
-          <button className="icon-btn" onClick={() => setDrawer(true)} aria-label="Open menu">☰</button>
+          <button className="icon-btn drawer-btn" onClick={() => setDrawer(true)} aria-label="Open menu">☰</button>
           <Link className="icon-btn" href="/cart" aria-label={`Cart, ${cartCount} items`}>🛒<span className="pill-count"> {cartCount}</span></Link>
           <span className="icon-btn" title="Wishlist items" aria-label={`Wishlist, ${wishlist.length} items`}>♡<span className="pill-count">{wishlist.length}</span></span>
           <Link className="icon-btn" href="/admin" aria-label="Account">👤</Link>
         </div>
-        <nav className="header-cta" aria-label="Account and cart">
-          <Link className="pill" href="/shop">Shop</Link>
-          <Link className="pill" href="/cart">🛒 Cart <span className="pill-count">{cartCount}</span></Link>
-          <span className="pill" title="Wishlist items">♡ Wishlist <span className="pill-count">{wishlist.length}</span></span>
-          <Link className="pill" href="/admin">Admin</Link>
-        </nav>
       </div>
       <nav className="catnav" aria-label="Categories">
         <div className="catnav-inner">
-          <button className="menu-btn" onClick={() => setOpen(!open)} aria-expanded={open}>☰ All Categories ▾</button>
+          <button className="menu-btn" onClick={() => setOpen(!open)} aria-expanded={open}>☰ Categories ▾</button>
           <Link href="/">Home</Link>
           <Link href="/shop">All Books</Link>
-          {CATEGORIES.slice(0, 5).map((c) => (
+          {CATEGORIES.map((c) => (
             <Link key={c.id} href={`/shop?cat=${c.slug}`}>{c.name}</Link>
           ))}
           <Link href="/checkout">Checkout</Link>
+          <Link href="/#contact">Contact</Link>
           <div className={`mega-panel ${open ? "open" : ""}`}>
             {CATEGORIES.map((c) => (
               <Link key={c.id} href={`/shop?cat=${c.slug}`} onClick={() => setOpen(false)}>{c.name} →</Link>

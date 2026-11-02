@@ -52,7 +52,7 @@ export default function Header() {
         <div className="catnav-inner">
           <button className="menu-btn" onClick={() => setOpen(!open)} aria-expanded={open}>☰ Categories ▾</button>
           <Link href="/">Home</Link>
-          <Link href="/shop">All Books</Link>
+          <Link href="/shop">Shop</Link>
           {CATEGORIES.map((c) => (
             <Link key={c.id} href={`/shop?cat=${c.slug}`}>{c.name}</Link>
           ))}

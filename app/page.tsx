@@ -110,7 +110,7 @@ export default function Home() {
           <p>Every collection below is one of the store&apos;s own categories, shown with its real books and prices.</p>
         </div>
         {CATEGORIES.map((c) => {
-          const items = products.filter((p) => p.category_id === c.id).slice(0, 5);
+          const items = products.filter((p) => p.category_id === c.id).slice(0, 4);
           if (items.length === 0) return null;
           return (
             <div key={c.id} style={{ marginBottom: 30 }}>

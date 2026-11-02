@@ -182,3 +182,122 @@ main{max-width:1280px;margin:0 auto;padding:20px}
   .mega-panel{grid-template-columns:1fr;left:12px;right:12px}
   .header-main{padding:12px 14px}
 }
+
+/* ================= REDESIGN v2 — mobile-first ================= */
+html,body{overflow-x:hidden}
+.hamburger{display:none}
+.mobile-cart{display:none}
+.drawer-overlay{display:none}
+.drawer{display:none}
+
+/* Desktop polish: smoother cards, consistent heights, sticky nav already via header */
+.card-img img{transition:transform .25s ease}
+.card:hover .card-img img{transform:scale(1.03)}
+.card-body h3{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.hero-thumbs{scroll-snap-type:x proximity}
+.hero-thumbs button{scroll-snap-align:center}
+.catnav{position:sticky;top:0;z-index:39}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .cat-grid{grid-template-columns:repeat(3,1fr)}
+  .hero-copy h1{font-size:36px}
+}
+
+@media(max-width:640px){
+  /* --- compact mobile header: hamburger + logo + cart, search on its own row --- */
+  .topbar-inner{justify-content:center;padding:6px 12px;font-size:12px}
+  .topbar-inner span:last-child{display:none}
+  .header-main{display:grid;grid-template-columns:44px 1fr auto;gap:10px;padding:10px 12px}
+  .hamburger{display:inline-grid;place-items:center;width:44px;height:44px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--green);font-size:20px;cursor:pointer}
+  .logo-link{justify-content:flex-start}
+  .logo-mark{width:40px;height:40px}
+  .brand-name{font-size:17px}
+  .brand-tag{font-size:9.5px;letter-spacing:1px}
+  .search{grid-column:1/-1;min-width:0}
+  .search input{padding:11px 14px;font-size:14px}
+  .search button{padding:11px 16px;font-size:14px}
+  .mobile-cart{display:inline-flex;align-items:center;gap:4px;font-size:20px;color:var(--green);position:relative}
+  .mobile-cart .pill-count{position:absolute;top:-6px;right:-8px}
+  .header-cta{display:none}
+  /* --- scrollable category strip (no desktop mega button on phones) --- */
+  .menu-btn{display:none}
+  .catnav-inner{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding:0 12px}
+  .catnav-inner::-webkit-scrollbar{display:none}
+  .catnav-inner a{white-space:nowrap;padding:11px 11px;font-size:13.5px;flex:0 0 auto}
+  /* --- slide-in drawer --- */
+  .drawer-overlay{display:block;position:fixed;inset:0;background:rgba(11,42,34,.55);z-index:80}
+  .drawer{display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;width:min(320px,85vw);background:#fff;z-index:81;overflow-y:auto;box-shadow:20px 0 50px rgba(0,0,0,.25);animation:drawer-in .22s ease}
+  @keyframes drawer-in{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+  .drawer-head{display:flex;justify-content:space-between;align-items:center;padding:16px;background:var(--green-dark);color:#fff}
+  .drawer-head .footer-brand{font-size:17px}
+  .drawer-close{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;font-size:16px;cursor:pointer}
+  .drawer-title{margin:18px 16px 6px;font-size:12px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold-dark)}
+  .drawer-links{display:grid}
+  .drawer-links a{padding:13px 16px;border-bottom:1px solid var(--grey);color:var(--green);font-weight:700;font-size:15px}
+  .drawer-links a:hover{text-decoration:none;background:var(--cream)}
+  .drawer-foot{padding:16px;color:var(--muted);font-size:14px}
+  /* --- compact hero for phones --- */
+  main{padding:14px 12px}
+  .hero{border-radius:18px}
+  .hero-copy{padding:24px 18px;gap:10px}
+  .hero-copy h1{font-size:28px;line-height:1.15}
+  .hero-copy p{font-size:15px}
+  .hero-ctas .btn-gold,.hero-ctas .btn-outline{flex:1;padding:12px 10px;font-size:14px}
+  .hero-stats{gap:14px}
+  .hero-stats b{font-size:16px}
+  .hero-book{padding:18px 14px}
+  .hero-book-img{max-width:230px}
+  .hero-thumbs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scrollbar-width:none;width:100%;padding-bottom:4px}
+  .hero-thumbs::-webkit-scrollbar{display:none}
+  .hero-thumbs button{flex:0 0 auto}
+  /* --- sections, tiles, cards: tight 2-per-row phone layout --- */
+  .section{margin:28px 0}
+  .section-head h2{font-size:22px}
+  .section-head{margin-bottom:12px}
+  .grid,.cat-grid{gap:10px}
+  .cat-tile{border-radius:14px}
+  .cat-tile-img{aspect-ratio:16/11}
+  .cat-tile-body{padding:10px 12px}
+  .cat-tile-body strong{font-size:14px}
+  .cat-tile-body span{font-size:12px}
+  .card{border-radius:14px}
+  .card-img img{padding:8px}
+  .badge{top:8px;left:8px;padding:4px 9px;font-size:11.5px}
+  .wish-btn{top:8px;right:8px;width:34px;height:34px}
+  .card-body{padding:11px 11px 13px;gap:6px}
+  .card-body h3{font-size:13.5px;line-height:1.4;min-height:38px}
+  .card-cat{font-size:10.5px}
+  .price strong{font-size:16px}
+  .price del{font-size:12.5px}
+  .price .pct{font-size:11.5px}
+  .card-actions .btn{min-height:44px;font-size:14px;padding:11px 10px}
+  .quick-link{font-size:13px}
+  .why-grid{gap:10px}
+  .why-box{padding:16px}
+  /* --- shop / detail / cart on phones --- */
+  .shop-banner{padding:20px 18px;border-radius:16px}
+  .shop-banner h1{font-size:25px}
+  .toolbar{padding:12px}
+  .filters select,.filters input{flex:1 1 100%;min-width:0}
+  .detail-img{border-radius:16px}
+  .detail h1{font-size:23px}
+  .detail-price{font-size:24px}
+  .detail-actions .btn,.detail-actions .btn-gold{flex:1 1 45%;padding:12px 10px;font-size:14px}
+  .qty button{width:44px;height:44px}
+  .cart-row{padding:12px;gap:12px}
+  .cart-row img{width:64px;height:auto}
+  .form-card{padding:18px 16px}
+  .field input,.field textarea,.field select{font-size:16px}
+  /* --- footer + WhatsApp on phones --- */
+  .footer-inner{padding:32px 16px 16px;gap:22px}
+  .wa-float{right:12px;bottom:12px;padding:11px 14px;font-size:14px}
+}
+
+@media(max-width:390px){
+  .brand-name{font-size:15.5px}
+  .card-body h3{font-size:13px}
+  .price strong{font-size:15px}
+  .section-head h2{font-size:20px}
+  .hero-copy h1{font-size:25px}
+}

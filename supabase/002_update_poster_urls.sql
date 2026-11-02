@@ -1,0 +1,54 @@
+-- Update Supabase product images to the new clean local posters.
+-- Run in Supabase SQL Editor. Live site reads image_url from this table,
+-- so without this step it keeps showing the old remote covers.
+-- (Fallback catalogue in lib/products.ts already points at /posters/<slug>.jpg.)
+UPDATE products SET image_url = '/posters/tracing-quran.jpg' WHERE slug = 'tracing-quran';
+UPDATE products SET image_url = '/posters/durood-diary.jpg' WHERE slug = 'durood-diary';
+UPDATE products SET image_url = '/posters/sarfi-research.jpg' WHERE slug = 'sarfi-research';
+UPDATE products SET image_url = '/posters/sihah-sittah.jpg' WHERE slug = 'sihah-sittah';
+UPDATE products SET image_url = '/posters/sawa-lakh-durood.jpg' WHERE slug = 'sawa-lakh-durood';
+UPDATE products SET image_url = '/posters/tarakib-quran.jpg' WHERE slug = 'tarakib-quran';
+UPDATE products SET image_url = '/posters/alsarf-quran.jpg' WHERE slug = 'alsarf-quran';
+UPDATE products SET image_url = '/posters/book-01.jpg' WHERE slug = 'book-01';
+UPDATE products SET image_url = '/posters/book-03.jpg' WHERE slug = 'book-03';
+UPDATE products SET image_url = '/posters/book-04.jpg' WHERE slug = 'book-04';
+UPDATE products SET image_url = '/posters/book-05.jpg' WHERE slug = 'book-05';
+UPDATE products SET image_url = '/posters/book-06.jpg' WHERE slug = 'book-06';
+UPDATE products SET image_url = '/posters/book-07.jpg' WHERE slug = 'book-07';
+UPDATE products SET image_url = '/posters/book-09.jpg' WHERE slug = 'book-09';
+UPDATE products SET image_url = '/posters/book-10.jpg' WHERE slug = 'book-10';
+UPDATE products SET image_url = '/posters/book-11.jpg' WHERE slug = 'book-11';
+UPDATE products SET image_url = '/posters/book-13.jpg' WHERE slug = 'book-13';
+UPDATE products SET image_url = '/posters/book-14.jpg' WHERE slug = 'book-14';
+UPDATE products SET image_url = '/posters/book-15.jpg' WHERE slug = 'book-15';
+UPDATE products SET image_url = '/posters/book-16.jpg' WHERE slug = 'book-16';
+UPDATE products SET image_url = '/posters/book-17.jpg' WHERE slug = 'book-17';
+UPDATE products SET image_url = '/posters/book-18.jpg' WHERE slug = 'book-18';
+UPDATE products SET image_url = '/posters/book-22.jpg' WHERE slug = 'book-22';
+UPDATE products SET image_url = '/posters/book-30.jpg' WHERE slug = 'book-30';
+UPDATE products SET image_url = '/posters/book-39.jpg' WHERE slug = 'book-39';
+UPDATE products SET image_url = '/posters/book-56.jpg' WHERE slug = 'book-56';
+UPDATE products SET image_url = '/posters/book-57.jpg' WHERE slug = 'book-57';
+UPDATE products SET image_url = '/posters/book-58.jpg' WHERE slug = 'book-58';
+UPDATE products SET image_url = '/posters/book-59.jpg' WHERE slug = 'book-59';
+UPDATE products SET image_url = '/posters/book-60.jpg' WHERE slug = 'book-60';
+UPDATE products SET image_url = '/posters/book-61.jpg' WHERE slug = 'book-61';
+UPDATE products SET image_url = '/posters/book-62.jpg' WHERE slug = 'book-62';
+UPDATE products SET image_url = '/posters/book-63.jpg' WHERE slug = 'book-63';
+UPDATE products SET image_url = '/posters/book-64.jpg' WHERE slug = 'book-64';
+UPDATE products SET image_url = '/posters/book-65.jpg' WHERE slug = 'book-65';
+UPDATE products SET image_url = '/posters/book-66.jpg' WHERE slug = 'book-66';
+UPDATE products SET image_url = '/posters/book-67.jpg' WHERE slug = 'book-67';
+UPDATE products SET image_url = '/posters/book-68.jpg' WHERE slug = 'book-68';
+UPDATE products SET image_url = '/posters/book-69.jpg' WHERE slug = 'book-69';
+UPDATE products SET image_url = '/posters/book-70.jpg' WHERE slug = 'book-70';
+UPDATE products SET image_url = '/posters/book-71.jpg' WHERE slug = 'book-71';
+UPDATE products SET image_url = '/posters/book-72.jpg' WHERE slug = 'book-72';
+UPDATE products SET image_url = '/posters/book-73.jpg' WHERE slug = 'book-73';
+UPDATE products SET image_url = '/posters/book-74.jpg' WHERE slug = 'book-74';
+UPDATE products SET image_url = '/posters/book-75.jpg' WHERE slug = 'book-75';
+UPDATE products SET image_url = '/posters/book-76.jpg' WHERE slug = 'book-76';
+UPDATE products SET image_url = '/posters/book-77.jpg' WHERE slug = 'book-77';
+UPDATE products SET image_url = '/posters/book-78.jpg' WHERE slug = 'book-78';
+UPDATE products SET image_url = '/posters/book-79.jpg' WHERE slug = 'book-79';
+UPDATE products SET image_url = '/posters/book-81.jpg' WHERE slug = 'book-81';

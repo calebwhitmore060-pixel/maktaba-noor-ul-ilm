@@ -1,10 +1,12 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { categoryName, discountPct, type Product } from "../lib/products";
 import { useStore, formatRs } from "../lib/store";
 
 export default function ProductCard({ product }: { product: Product }) {
+  const router = useRouter();
   const { addToCart, toggleWishlist, wishlist } = useStore();
   const disc = discountPct(product);
   const wished = wishlist.some((w) => w.slug === product.slug);
@@ -13,13 +15,16 @@ export default function ProductCard({ product }: { product: Product }) {
       <Link href={`/product/${product.slug}`} className="card-img" aria-label={product.name}>
         <Image src={product.image_url} alt={product.name} width={600} height={800} loading="lazy" />
         {disc > 0 && <span className="badge">-{disc}%</span>}
-        <button
-          className={`wish-btn ${wished ? "active" : ""}`}
-          onClick={(e) => { e.preventDefault(); toggleWishlist(product); }}
-          aria-label={wished ? "Remove from wishlist" : "Add to wishlist"}
-        >
-          {wished ? "♥" : "♡"}
-        </button>
+        <span className="card-tools">
+          <button
+            className={`tool-btn ${wished ? "active" : ""}`}
+            onClick={(e) => { e.preventDefault(); toggleWishlist(product); }}
+            aria-label={wished ? "Remove from wishlist" : "Add to wishlist"}
+          >
+            {wished ? "♥" : "♡"}
+          </button>
+          <button className="tool-btn" onClick={(e) => { e.preventDefault(); router.push(`/product/${product.slug}`); }} aria-label={`Quick view ${product.name}`}>👁</button>
+        </span>
       </Link>
       <div className="card-body">
         <span className="card-cat">{categoryName(product.category_id)}</span>

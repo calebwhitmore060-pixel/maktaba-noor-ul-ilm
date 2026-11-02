@@ -55,4 +55,4 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   );
 }
 export const WHATSAPP_URL = "https://wa.me/923075722464";
-export const formatRs = (n: number) => `Rs ${n.toLocaleString("en-PK")}`;
+export const formatRs = (n: number) => `PKR ${n.toLocaleString("en-PK")}/-`;

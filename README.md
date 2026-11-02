@@ -66,3 +66,5 @@ product/order lists + order status updates, SEO metadata, sitemap, robots.
 - Product images still point at the live noorulilmfinal.42web.io covers
   (the original supplied photos). Moving them to Supabase Storage is a
   later, optional step and does not change any title or price.
+
+<!-- v5: clean posters + banners, redeploy trigger -->

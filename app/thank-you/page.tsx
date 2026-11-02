@@ -9,14 +9,14 @@ export default function ThankYou() {
   if (!order) return <p>No recent order found. <Link href="/shop">Browse books</Link></p>;
   return (
     <>
-      <h1>Thank you — order received</h1>
+      <div className="shop-banner"><h1>Thank you — order received</h1><p>Your Cash on Delivery order details are below.</p></div><div className="form-card">
       <p>Order reference: <strong>{order.id}</strong></p>
       {order.id === "WHATSAPP-FALLBACK" && <p>This order was sent via WhatsApp (Supabase was not configured), not saved in a database. Keep your WhatsApp chat as the confirmation.</p>}
       <p>Name: {order.name} · Phone: {order.phone} · City: {order.city}</p>
       <p>Address: {order.address}</p>
       <ul>{order.items.map((i: any) => <li key={i.product.slug}>{i.product.name} x {i.qty} — {formatRs(i.product.price * i.qty)}</li>)}</ul>
       <p><strong>Total: {formatRs(order.total)}</strong> · Payment: Cash on Delivery</p>
-      <Link href="/shop">Continue shopping</Link>
+      <Link className="btn" href="/shop">Continue shopping</Link></div>
     </>
   );
 }

@@ -22,11 +22,11 @@ export default function Home() {
   const hero = featured[slide % Math.max(featured.length, 1)] ?? products[0];
   const firstOf = (catId: string) => products.find((p) => p.category_id === catId);
   return (
-    <>
-      {!live && <div className="notice">{setupMessage()} Preview data: {products.length} supplied books, {CATEGORIES.length} categories.</div>}
-      {live && <div className="notice">✓ Live Supabase data loaded.</div>}
+    <div className="home-flow">
+      {!live && <div className="notice order-notice">{setupMessage()} Preview data: {products.length} supplied books, {CATEGORIES.length} categories.</div>}
+      {live && <div className="notice order-notice">✓ Live Supabase data loaded.</div>}
 
-      <section className="hero">
+      <section className="hero order-hero">
         <div className="hero-copy">
           <p className="eyebrow">Islamic Bookstore · Lahore</p>
           <h1>Authentic Islamic books, delivered to your door.</h1>
@@ -63,8 +63,8 @@ export default function Home() {
         )}
       </section>
 
-      <section className="section" id="categories">
-        <div className="section-head">
+      <section className="section order-cat" id="categories">
+        <div className="section-head cat-section-head">
           <div>
             <p className="eyebrow">Top Categories</p>
             <h2>Shop by category</h2>
@@ -80,6 +80,7 @@ export default function Home() {
                 <span className="cat-tile-img">
                   {first && <Image src={first.image_url} alt="" width={480} height={300} />}
                 </span>
+                <span className="cat-tile-overlay"><strong>{c.name}</strong><span>{count} books</span></span>
                 <span className="cat-tile-body">
                   <span><strong>{c.name}</strong><br /><span>{count} books</span></span>
                   <span className="cat-tile-arrow">→</span>
@@ -90,18 +91,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="section-head">
+      <section className="section order-featured">
+        <div className="section-head section-bar">
           <div>
             <p className="eyebrow">Handpicked for you</p>
             <h2>Featured products</h2>
           </div>
-          <Link className="view-all" href="/shop">View all books →</Link>
+          <Link className="view-all" href="/shop">View all →</Link>
         </div>
         <div className="grid">{featured.map((p) => <ProductCard key={p.slug} product={p} />)}</div>
       </section>
 
-      <section className="section">
+      <section className="section order-collections">
         <div className="section-head">
           <div>
             <p className="eyebrow">Shop by collection</p>
@@ -114,8 +115,8 @@ export default function Home() {
           if (items.length === 0) return null;
           return (
             <div key={c.id} style={{ marginBottom: 30 }}>
-              <div className="section-head" style={{ marginBottom: 12 }}>
-                <h2 style={{ fontSize: 22 }}>{c.name}</h2>
+              <div className="section-head section-bar" style={{ marginBottom: 12 }}>
+                <h2>{c.name}</h2>
                 <Link className="view-all" href={`/shop?cat=${c.slug}`}>View all →</Link>
               </div>
               <div className="grid">{items.map((p) => <ProductCard key={p.slug} product={p} />)}</div>
@@ -124,7 +125,7 @@ export default function Home() {
         })}
       </section>
 
-      <section className="section">
+      <section className="section order-why">
         <div className="section-head">
           <div>
             <p className="eyebrow">Why shop with us</p>
@@ -139,11 +140,11 @@ export default function Home() {
         </div>
       </section>
 
-      <p style={{ color: "#6B7280", fontSize: 14 }}>
+      <p className="order-note" style={{ color: "#6B7280", fontSize: 14 }}>
         Catalogue note: author, publisher, ISBN, SKU, stock and long descriptions were not supplied for most books, so those fields are left blank rather than invented.
         No bestseller labels or blog posts are shown because no sales data or articles were supplied.
         Supabase configured: {isSupabaseConfigured ? "yes" : "no — preview mode"}
       </p>
-    </>
+    </div>
   );
 }

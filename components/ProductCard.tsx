@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { discountPct, type Product } from "../lib/products";
+import { categoryName, discountPct, type Product } from "../lib/products";
 import { useStore, formatRs } from "../lib/store";
 
 export default function ProductCard({ product }: { product: Product }) {
@@ -10,20 +10,32 @@ export default function ProductCard({ product }: { product: Product }) {
   const wished = wishlist.some((w) => w.slug === product.slug);
   return (
     <article className="card">
-      <Link href={`/product/${product.slug}`} className="card-img">
+      <Link href={`/product/${product.slug}`} className="card-img" aria-label={product.name}>
         <Image src={product.image_url} alt={product.name} width={600} height={800} loading="lazy" />
-        {disc > 0 && <span className="badge">{disc}% OFF</span>}
+        {disc > 0 && <span className="badge">-{disc}%</span>}
+        <button
+          className={`wish-btn ${wished ? "active" : ""}`}
+          onClick={(e) => { e.preventDefault(); toggleWishlist(product); }}
+          aria-label={wished ? "Remove from wishlist" : "Add to wishlist"}
+        >
+          {wished ? "♥" : "♡"}
+        </button>
       </Link>
       <div className="card-body">
-        <Link href={`/product/${product.slug}`}><h3>{product.name}</h3></Link>
+        <span className="card-cat">{categoryName(product.category_id)}</span>
+        <h3><Link href={`/product/${product.slug}`}>{product.name}</Link></h3>
         <p className="price">
           <strong>{formatRs(product.price)}</strong>
-          {product.original_price && <del>{formatRs(product.original_price)}</del>}
+          {product.original_price && (
+            <>
+              <del>{formatRs(product.original_price)}</del>
+              <span className="pct">-{disc}%</span>
+            </>
+          )}
         </p>
         <div className="card-actions">
-          <button onClick={() => addToCart(product)}>Add to Cart</button>
-          <button onClick={() => toggleWishlist(product)} aria-label="Wishlist">{wished ? "♥ Saved" : "♡ Wishlist"}</button>
-          <Link href={`/product/${product.slug}`}>Quick View</Link>
+          <button className="btn" onClick={() => addToCart(product)}>Add to Cart</button>
+          <Link className="quick-link" href={`/product/${product.slug}`}>View Details →</Link>
         </div>
       </div>
     </article>

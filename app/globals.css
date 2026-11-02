@@ -301,3 +301,89 @@ html,body{overflow-x:hidden}
   .section-head h2{font-size:20px}
   .hero-copy h1{font-size:25px}
 }
+
+/* ================= REDESIGN v3 — reference mobile refinements ================= */
+/* Desktop: icon row hidden, footer stays structured; floating buttons repositioned */
+.mobile-icons{display:none}
+.card-tools{position:absolute;top:10px;right:10px;z-index:2;display:flex;flex-direction:column;gap:8px}
+.tool-btn{width:38px;height:38px;border-radius:50%;border:0;background:var(--green);color:#fff;cursor:pointer;font-size:17px;line-height:1;display:grid;place-items:center;text-decoration:none}
+.tool-btn:hover{background:var(--green-dark);text-decoration:none}
+.tool-btn.active{background:var(--gold);color:#1d1a12}
+.cat-tile{position:relative}
+.cat-tile-overlay{display:none}
+.section-bar{background:var(--green-soft);border-radius:12px;padding:12px 18px;align-items:center}
+.section-bar h2{color:#fff;font-size:22px}
+.section-bar h2:after{display:none}
+.section-bar .eyebrow{display:none}
+.section-bar .view-all{color:#fff}
+.drawer-search{display:flex;gap:8px;padding:14px 16px;border-bottom:1px solid var(--grey)}
+.drawer-search input{flex:1;min-width:0;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;font-size:16px;outline:none}
+.drawer-search button{background:var(--green);color:#fff;border:0;border-radius:10px;padding:11px 16px;font-weight:800;cursor:pointer;white-space:nowrap}
+.to-top{display:none;position:fixed;right:18px;bottom:18px;z-index:60;width:55px;height:55px;border-radius:14px;border:0;background:var(--green);color:#fff;font-size:22px;font-weight:900;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.22)}
+.to-top.show{display:grid;place-items:center}
+/* White footer (was dark green) with dark text + green accents */
+.site-footer{background:#fff;color:var(--ink);border-top:1px solid var(--line)}
+.site-footer h4{color:var(--green)}
+.site-footer a{color:var(--green)}
+.footer-bottom{border-top:1px solid var(--line);color:var(--muted)}
+.footer-brand{color:var(--green)}
+.footer-brand em{color:var(--gold-dark)}
+/* WhatsApp fixed bottom-LEFT (was bottom-right) */
+.wa-float{left:18px;right:auto}
+
+@media(max-width:640px){
+  /* 1. Mobile header: announcement hidden, logo left + square icon buttons right, no search in header */
+  .topbar{display:none}
+  .header-main{display:flex;flex-wrap:nowrap;justify-content:space-between;gap:8px;padding:10px 12px}
+  .logo-link{flex:1 1 auto;min-width:0}
+  .search{display:none}
+  .hamburger{display:none}
+  .mobile-cart{display:none}
+  .mobile-icons{display:flex;gap:6px;align-items:center;flex:0 0 auto}
+  .icon-btn{position:relative;display:inline-grid;place-items:center;width:44px;height:44px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--green);font-size:19px;cursor:pointer;text-decoration:none}
+  .icon-btn:hover{text-decoration:none}
+  .icon-btn .pill-count{position:absolute;top:-7px;right:-7px;min-width:20px;height:20px;font-size:11px}
+  /* 2. Categories first on mobile: flex order (hero slim, below category strip) */
+  .home-flow{display:flex;flex-direction:column}
+  .order-notice{order:0}
+  .order-cat{order:1}
+  .order-hero{order:2}
+  .order-featured{order:3}
+  .order-collections{order:4}
+  .order-why{order:5}
+  .order-note{order:6}
+  /* 3. Mobile categories: wide-banner swipe carousel, heading hidden */
+  .cat-section-head{display:none}
+  .cat-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding-bottom:4px;scrollbar-width:none}
+  .cat-grid::-webkit-scrollbar{display:none}
+  .cat-grid .cat-tile{flex:0 0 86%;scroll-snap-align:center;border-radius:14px}
+  .cat-grid .cat-tile-img{aspect-ratio:3.7/1}
+  .cat-grid .cat-tile-img img{object-fit:cover;padding:0}
+  .cat-grid .cat-tile-img:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,42,34,.72),rgba(11,42,34,.15));border-radius:inherit}
+  .cat-grid .cat-tile-body{display:none}
+  .cat-tile-overlay{display:flex;flex-direction:column;gap:2px;position:absolute;left:16px;top:50%;transform:translateY(-50%);z-index:2;color:#fff}
+  .cat-tile-overlay strong{font-size:17px;line-height:1.25}
+  .cat-tile-overlay span{font-size:13px;color:#EDE6D3}
+  /* Hero slim on phones */
+  .hero-copy{padding:20px 16px}
+  .hero-copy p,.hero-stats,.hero-thumbs{display:none}
+  .hero-book{padding:14px}
+  .hero-book-img{max-width:170px}
+  /* 4. Product cards: centered body on phones */
+  .card-body{text-align:center;align-items:center}
+  .card-body h3{text-align:center}
+  .price{justify-content:center}
+  .card-tools{top:8px;right:8px;gap:6px}
+  .tool-btn{width:36px;height:36px;font-size:16px}
+  .card-actions .btn{min-height:44px}
+  /* 5. Section bars on phones: full-width green bars */
+  .section-bar{border-radius:10px;padding:11px 14px}
+  .section-bar h2{font-size:18px}
+  .section-bar .view-all{font-size:13.5px}
+  /* 6. Floating buttons: WhatsApp bottom-left circle, back-to-top bottom-right */
+  .wa-float{left:12px;bottom:12px;right:auto;width:55px;height:55px;border-radius:50%;padding:0;display:grid;place-items:center;font-size:24px}
+  .wa-float-text{display:none}
+  .to-top{right:12px;bottom:12px;width:55px;height:55px}
+  /* 7. Footer stacks white on phones (already 1 column) */
+  .footer-inner{padding:28px 16px 16px}
+}

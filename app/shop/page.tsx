@@ -25,20 +25,25 @@ function ShopInner() {
   }, [cat, q, sort]);
   return (
     <>
-      <h1>All Books ({list.length})</h1>
-      <div className="filters">
-        <select value={cat} onChange={(e) => setCat(e.target.value)} aria-label="Category">
-          <option value="">All categories</option>
-          {CATEGORIES.map((c) => <option key={c.id} value={c.slug}>{c.name}</option>)}
-        </select>
-        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by title or category" aria-label="Search" />
-        <select value={sort} onChange={(e) => setSort(e.target.value)} aria-label="Sort">
-          <option value="featured">Sort: Featured first</option>
-          <option value="price-asc">Price: low to high</option>
-          <option value="price-desc">Price: high to low</option>
-        </select>
+      <div className="shop-banner">
+        <h1>All Books ({list.length})</h1>
+        <p>Browse the full supplied catalogue — filter by category, search by title, or sort by price.</p>
       </div>
-      <p>“Newest” sorting is not offered as a separate claim: the catalogue has no supplied dates, so seed order is used for featured ordering.</p>
+      <div className="toolbar">
+        <div className="filters">
+          <select value={cat} onChange={(e) => setCat(e.target.value)} aria-label="Category">
+            <option value="">All categories</option>
+            {CATEGORIES.map((c) => <option key={c.id} value={c.slug}>{c.name}</option>)}
+          </select>
+          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by title or category" aria-label="Search" />
+          <select value={sort} onChange={(e) => setSort(e.target.value)} aria-label="Sort">
+            <option value="featured">Sort: Featured first</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+          </select>
+        </div>
+      </div>
+      <p style={{ color: "#6B7280", fontSize: 14 }}>“Newest” sorting is not offered as a separate claim: the catalogue has no supplied dates, so seed order is used for featured ordering.</p>
       {list.length === 0 ? <p>No books match your search. Try another title or category.</p> : <div className="grid">{list.map((p) => <ProductCard key={p.slug} product={p} />)}</div>}
     </>
   );

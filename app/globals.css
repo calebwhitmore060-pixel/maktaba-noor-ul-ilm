@@ -387,3 +387,74 @@ html,body{overflow-x:hidden}
   /* 7. Footer stacks white on phones (already 1 column) */
   .footer-inner{padding:28px 16px 16px}
 }
+
+/* ================= REDESIGN v4 — desktop match to reference screenshots ================= */
+:root{--leaf:#4E9A06;--leaf-dark:#3E7A05}
+/* 2. Black top bar */
+.topbar{background:#000;color:#EDE6D3}
+.topbar-inner a{color:#fff}
+/* 2. White header: rectangular search + leaf-green button, square icon buttons */
+.search{border:2px solid var(--leaf);border-radius:8px}
+.search input{padding:12px 16px}
+.search select{border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);background:#fff;padding:12px 10px;font-weight:600;color:var(--green);outline:none;max-width:170px;cursor:pointer}
+.search button{background:var(--leaf);color:#fff;border-radius:0;padding:12px 18px;font-size:17px}
+.search button:hover{background:var(--leaf-dark)}
+.mobile-icons{display:flex;gap:10px;align-items:center;flex:0 0 auto}
+.icon-btn{position:relative;display:inline-grid;place-items:center;width:48px;height:48px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--green);font-size:20px;cursor:pointer;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.icon-btn:hover{text-decoration:none;border-color:var(--leaf)}
+.icon-btn .pill-count{position:absolute;top:-8px;right:-8px;min-width:20px;height:20px;font-size:11px;background:var(--green);color:#fff}
+.drawer-btn{display:none}
+/* 3. Leaf-green nav bar */
+.catnav{background:var(--leaf)}
+.catnav-inner a{font-size:14px;padding:13px 12px}
+.menu-btn{background:rgba(0,0,0,.18);color:#fff}
+.menu-btn:hover{background:rgba(0,0,0,.28)}
+/* 4. Full-width photographic hero slider (desktop) */
+.hero-slider{position:relative;width:100vw;margin-left:calc(50% - 50vw);height:470px;overflow:hidden;background:#eee}
+.hero-slide{position:absolute;inset:0;display:block}
+.hero-slide img{object-fit:cover;width:100%;height:100%}
+.hero-slide-overlay{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:30px 20px 52px;background:linear-gradient(transparent,rgba(0,0,0,.68));color:#fff;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.hero-slide-overlay .hero-slide-name,.hero-slide-overlay .hero-slide-price{max-width:1280px;width:100%;margin-left:auto;margin-right:auto}
+.hero-slide-name{color:#fff;font-size:26px;font-weight:900;line-height:1.3}
+.hero-slide-name:hover{color:#fff}
+.hero-slide-price{font-size:20px;font-weight:900;color:#fff}
+.hero-slide-price del{color:#D8D8D8;font-weight:600;font-size:15px;margin-left:8px}
+.hero-slide-overlay .btn-gold{width:auto}
+.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:var(--green);font-size:26px;font-weight:900;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.hero-prev{left:16px}
+.hero-next{right:16px}
+.hero-slider-dots{position:absolute;left:20px;bottom:16px;z-index:3;display:flex;gap:8px}
+.hero-slider-dots button{width:11px;height:11px;border-radius:50%;border:2px solid #fff;background:transparent;cursor:pointer;padding:0}
+.hero-slider-dots button.active{background:#fff}
+/* 5. Centered product cards on desktop */
+.card{border:1px solid #E3E8E3;border-radius:10px}
+.card-img{background:#fff}
+.card-body{text-align:center;align-items:center}
+.card-body h3{text-align:center}
+.card-cat{color:var(--gold-dark);font-size:11.5px}
+.price{justify-content:center}
+.price strong{color:var(--leaf-dark)}
+.card-actions{align-items:center}
+.card-actions .btn{width:100%;background:var(--leaf)}
+.card-actions .btn:hover{background:var(--leaf-dark)}
+/* 6. Leaf-green section bars */
+.section-bar{background:var(--leaf)}
+/* 7. WhatsApp circle bottom-left, icon only */
+.wa-float{left:18px;right:auto;width:55px;height:55px;border-radius:50%;padding:0;display:grid;place-items:center;font-size:24px}
+.wa-float-text{display:none}
+/* 8. White footer: thin top divider + centered copyright (divider + centering already in v3 footer rules) */
+.site-footer{border-top:3px solid var(--leaf)}
+.footer-bottom{text-align:center}
+
+@media(max-width:640px){
+  /* v4 mobile: keep v3 behaviour — drawer button visible, search hidden, icons row */
+  .mobile-icons .drawer-btn{display:inline-grid}
+  .hero-slider{height:240px}
+  .hero-slide-overlay{padding:16px 14px 40px;gap:4px}
+  .hero-slide-name{font-size:18px}
+  .hero-slide-price{font-size:15px}
+  .hero-slide-overlay .btn-gold{padding:9px 16px;font-size:13px}
+  .hero-arrow{width:36px;height:36px;font-size:20px}
+  .hero-slider-dots{bottom:10px}
+  .search select{display:none}
+}

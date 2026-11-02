@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "./globals.css";
 import Header from "../components/Header";
+import BackToTop from "../components/BackToTop";
 import LogoMark from "../components/Logo";
 import { StoreProvider } from "../lib/store";
 import { CATEGORIES } from "../lib/products";
@@ -47,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </ul>
               </div>
               <div>
-                <h4>Contact</h4>
+                <h4>Customer Care</h4>
                 <ul>
                   <li>WhatsApp: <a href="https://wa.me/923075722464">0307-5722464</a></li>
                   <li>Facebook: <a href="https://www.facebook.com/onlinebooks8076">onlinebooks8076</a></li>
@@ -59,7 +60,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
             <div className="footer-bottom">© Maktaba Noor-ul-Ilm, Lahore. Cash on Delivery across Pakistan. Delivery charges are confirmed on WhatsApp — no amount is stated here because none was supplied.</div>
           </footer>
-          <a className="wa-float" href="https://wa.me/923075722464" target="_blank" rel="noreferrer">💬 Chat on WhatsApp</a>
+          <a className="wa-float" href="https://wa.me/923075722464" target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp">💬<span className="wa-float-text"> Chat on WhatsApp</span></a>
+          <BackToTop />
         </StoreProvider>
       </body>
     </html>

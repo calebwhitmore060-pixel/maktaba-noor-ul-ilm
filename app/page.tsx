@@ -5,7 +5,6 @@ import Image from "next/image";
 import ProductCard from "../components/ProductCard";
 import { CATEGORIES, FALLBACK_PRODUCTS, type Product } from "../lib/products";
 import { getSupabase } from "../lib/supabase";
-import { formatRs } from "../lib/store";
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>(FALLBACK_PRODUCTS);
@@ -18,28 +17,24 @@ export default function Home() {
     });
   }, []);
   const featured = products.filter((p) => p.featured);
-  const hero = featured[slide % Math.max(featured.length, 1)] ?? products[0];
+  const BANNERS = [
+    { src: "/banners/hero-1.jpg", alt: "Featured Islamic Books — Shop Now" },
+    { src: "/banners/hero-2.jpg", alt: "Cash on Delivery across Pakistan — Shop Now" },
+    { src: "/banners/hero-3.jpg", alt: "Quran, Durood and Sarf books — Shop Now" },
+  ];
+  const hero = BANNERS[slide % BANNERS.length];
   const firstOf = (catId: string) => products.find((p) => p.category_id === catId);
   return (
     <div className="home-flow">
       <section className="hero-slider order-hero" aria-label="Featured books">
-        {hero && (
-          <Link href={`/product/${hero.slug}`} className="hero-slide" aria-label={hero.name}>
-            <Image src={hero.image_url} alt={hero.name} fill priority />
-          </Link>
-        )}
-        <button className="hero-arrow hero-prev" onClick={() => setSlide((s) => (s - 1 + featured.length) % featured.length)} aria-label="Previous featured book">‹</button>
-        <button className="hero-arrow hero-next" onClick={() => setSlide((s) => (s + 1) % featured.length)} aria-label="Next featured book">›</button>
-        {hero && (
-          <div className="hero-slide-overlay">
-            <Link href={`/product/${hero.slug}`} className="hero-slide-name">{hero.name}</Link>
-            <span className="hero-slide-price">{formatRs(hero.price)}{hero.original_price && <del>{formatRs(hero.original_price)}</del>}</span>
-            <Link className="btn-gold" href="/shop">Shop Now →</Link>
-          </div>
-        )}
+        <Link href="/shop" className="hero-slide" aria-label={hero.alt}>
+          <Image src={hero.src} alt={hero.alt} fill priority />
+        </Link>
+        <button className="hero-arrow hero-prev" onClick={() => setSlide((s) => (s - 1 + BANNERS.length) % BANNERS.length)} aria-label="Previous banner">‹</button>
+        <button className="hero-arrow hero-next" onClick={() => setSlide((s) => (s + 1) % BANNERS.length)} aria-label="Next banner">›</button>
         <div className="hero-slider-dots">
-          {featured.map((p, i) => (
-            <button key={p.slug} className={i === slide ? "active" : ""} onClick={() => setSlide(i)} aria-label={`Show ${p.name}`} />
+          {BANNERS.map((b, i) => (
+            <button key={b.src} className={i === slide ? "active" : ""} onClick={() => setSlide(i)} aria-label={`Show ${b.alt}`} />
           ))}
         </div>
       </section>

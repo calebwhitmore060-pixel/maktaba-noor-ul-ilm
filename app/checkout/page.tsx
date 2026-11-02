@@ -50,12 +50,12 @@ export default function Checkout() {
   if (cart.length === 0) return <p>Your cart is empty. <Link href="/shop">Browse books</Link></p>;
   return (
     <>
-      <h1>Checkout — Cash on Delivery</h1>
+      <div className="shop-banner"><h1>Checkout — Cash on Delivery</h1><p>Pay when your books arrive. No online payment is offered.</p></div>
       {!isSupabaseConfigured && <div className="notice">{setupMessage()} Checkout will use the WhatsApp order fallback until Supabase is configured.</div>}
-      <h2>Order summary</h2>
+      <div className="summary"><h2 style={{ marginTop: 0, color: "#123D32" }}>Order summary</h2>
       <ul>{cart.map((i) => <li key={i.product.slug}>{i.product.name} x {i.qty} — {formatRs(i.product.price * i.qty)}</li>)}</ul>
       <p><strong>Total: {formatRs(subtotal)}</strong> (shipping confirmed on WhatsApp)</p>
-      <form onSubmit={submit}>
+      </div><form className="form-card" onSubmit={submit} style={{ marginTop: 18 }}><h2 style={{ marginTop: 0, color: "#123D32" }}>Delivery details</h2>
         <div className="field"><label>Full Name *<input value={name} onChange={(e) => setName(e.target.value)} /></label></div>
         <div className="field"><label>Phone Number *<input value={phone} onChange={(e) => setPhone(e.target.value)} /></label></div>
         <div className="field"><label>City *<input value={city} onChange={(e) => setCity(e.target.value)} /></label></div>

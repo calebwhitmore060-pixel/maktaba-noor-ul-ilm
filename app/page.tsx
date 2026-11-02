@@ -4,18 +4,17 @@ import Link from "next/link";
 import Image from "next/image";
 import ProductCard from "../components/ProductCard";
 import { CATEGORIES, FALLBACK_PRODUCTS, type Product } from "../lib/products";
-import { getSupabase, isSupabaseConfigured, setupMessage } from "../lib/supabase";
+import { getSupabase } from "../lib/supabase";
 import { formatRs } from "../lib/store";
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>(FALLBACK_PRODUCTS);
-  const [live, setLive] = useState(false);
   const [slide, setSlide] = useState(0);
   useEffect(() => {
     const sb = getSupabase();
     if (!sb) return;
     sb.from("products").select("id,name,slug,price,original_price,image_url,detail_url,category_id,featured").then(({ data, error }) => {
-      if (!error && data && data.length > 0) { setProducts(data as Product[]); setLive(true); }
+      if (!error && data && data.length > 0) { setProducts(data as Product[]); }
     });
   }, []);
   const featured = products.filter((p) => p.featured);
@@ -23,44 +22,26 @@ export default function Home() {
   const firstOf = (catId: string) => products.find((p) => p.category_id === catId);
   return (
     <div className="home-flow">
-      {!live && <div className="notice order-notice">{setupMessage()} Preview data: {products.length} supplied books, {CATEGORIES.length} categories.</div>}
-      {live && <div className="notice order-notice">✓ Live Supabase data loaded.</div>}
-
-      <section className="hero order-hero">
-        <div className="hero-copy">
-          <p className="eyebrow">Islamic Bookstore · Lahore</p>
-          <h1>Authentic Islamic books, delivered to your door.</h1>
-          <p>Quran, Durood Sharif, Hadith, Sarf &amp; Nahw and more — original covers, fair prices, and Cash on Delivery across Pakistan.</p>
-          <div className="hero-ctas">
-            <Link className="btn-gold" href="/shop">Shop All Books →</Link>
-            <Link className="btn-outline" href="#categories">Browse Categories</Link>
-          </div>
-          <div className="hero-stats">
-            <span><b>{products.length}</b> books in store</span>
-            <span><b>{CATEGORIES.length}</b> categories</span>
-            <span><b>COD</b> across Pakistan</span>
-          </div>
-        </div>
+      <section className="hero-slider order-hero" aria-label="Featured books">
         {hero && (
-          <div className="hero-book">
-            <Link href={`/product/${hero.slug}`} className="hero-book-img">
-              <Image src={hero.image_url} alt={hero.name} fill />
-            </Link>
-            <Link href={`/product/${hero.slug}`} className="hero-book-name">{hero.name}</Link>
-            <span className="hero-book-price">{formatRs(hero.price)}{hero.original_price && <del>{formatRs(hero.original_price)}</del>}</span>
-            <div className="hero-dots">
-              <button onClick={() => setSlide((s) => (s - 1 + featured.length) % featured.length)} aria-label="Previous featured book">‹</button>
-              <button onClick={() => setSlide((s) => (s + 1) % featured.length)} aria-label="Next featured book">›</button>
-            </div>
-            <div className="hero-thumbs">
-              {featured.map((p, i) => (
-                <button key={p.slug} className={i === slide ? "active" : ""} onClick={() => setSlide(i)} aria-label={p.name}>
-                  <Image src={p.image_url} alt="" width={44} height={58} />
-                </button>
-              ))}
-            </div>
+          <Link href={`/product/${hero.slug}`} className="hero-slide" aria-label={hero.name}>
+            <Image src={hero.image_url} alt={hero.name} fill priority />
+          </Link>
+        )}
+        <button className="hero-arrow hero-prev" onClick={() => setSlide((s) => (s - 1 + featured.length) % featured.length)} aria-label="Previous featured book">‹</button>
+        <button className="hero-arrow hero-next" onClick={() => setSlide((s) => (s + 1) % featured.length)} aria-label="Next featured book">›</button>
+        {hero && (
+          <div className="hero-slide-overlay">
+            <Link href={`/product/${hero.slug}`} className="hero-slide-name">{hero.name}</Link>
+            <span className="hero-slide-price">{formatRs(hero.price)}{hero.original_price && <del>{formatRs(hero.original_price)}</del>}</span>
+            <Link className="btn-gold" href="/shop">Shop Now →</Link>
           </div>
         )}
+        <div className="hero-slider-dots">
+          {featured.map((p, i) => (
+            <button key={p.slug} className={i === slide ? "active" : ""} onClick={() => setSlide(i)} aria-label={`Show ${p.name}`} />
+          ))}
+        </div>
       </section>
 
       <section className="section order-cat" id="categories">
@@ -139,12 +120,6 @@ export default function Home() {
           <div className="why-box"><span className="why-icon">🚚</span><b>Across Pakistan</b><p>Delivery across Pakistan; charges confirmed on WhatsApp.</p></div>
         </div>
       </section>
-
-      <p className="order-note" style={{ color: "#6B7280", fontSize: 14 }}>
-        Catalogue note: author, publisher, ISBN, SKU, stock and long descriptions were not supplied for most books, so those fields are left blank rather than invented.
-        No bestseller labels or blog posts are shown because no sales data or articles were supplied.
-        Supabase configured: {isSupabaseConfigured ? "yes" : "no — preview mode"}
-      </p>
     </div>
   );
 }

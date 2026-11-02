@@ -33,13 +33,13 @@ export default function Admin() {
   };
   if (!user) {
     return (
-      <><h1>Admin Login</h1><p>Admin users are created by the site owner in Supabase Dashboard → Authentication → Users. No default admin account exists in this code.</p>
+      <><div className="shop-banner"><h1>Admin Login</h1><p>Sign in with the admin user created in Supabase.</p></div><div className="form-card"><p>Admin users are created by the site owner in Supabase Dashboard → Authentication → Users. No default admin account exists in this code.</p>
       <form onSubmit={login}>
         <div className="field"><label>Email<input value={email} onChange={(e) => setEmail(e.target.value)} /></label></div>
         <div className="field"><label>Password<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /></label></div>
         {msg && <p style={{ color: "#a00" }}>{msg}</p>}
         <button className="btn">Log in</button>
-      </form></>
+      </form></div></>
     );
   }
   return (
@@ -47,9 +47,9 @@ export default function Admin() {
       <h1>Admin Dashboard</h1>
       <p>Signed in as {user.email}</p>
       {msg && <p style={{ color: "#a00" }}>{msg}</p>}
-      <h2>Products ({products.length})</h2>
+      <div className="table-card"><h2 style={{ marginTop: 0, color: "#123D32" }}>Products ({products.length})</h2>
       <ul>{products.map((p) => <li key={p.id}>{p.name} — Rs {p.price} ({p.category_id})</li>)}</ul>
-      <h2>Orders ({orders.length})</h2>
+      </div><div className="table-card"><h2 style={{ marginTop: 0, color: "#123D32" }}>Orders ({orders.length})</h2>
       {orders.map((o) => (
         <div key={o.id} style={{ borderBottom: "1px solid #eee", padding: "8px 0" }}>
           <strong>{o.customer_name}</strong> · {o.phone} · {o.city} · Rs {o.total} ·
@@ -57,7 +57,7 @@ export default function Admin() {
             {STATUSES.map((s) => <option key={s}>{s}</option>)}
           </select>
         </div>
-      ))}
+      ))}</div>
     </>
   );
 }

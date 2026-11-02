@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <StoreProvider>
           <Header />
           <main>{children}</main>
-          <footer className="site-footer">
+          <footer className="site-footer" id="contact">
             <div className="footer-inner">
               <div>
                 <p style={{ display: "flex", alignItems: "center", gap: 12, margin: 0 }}>
@@ -58,9 +58,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </ul>
               </div>
             </div>
-            <div className="footer-bottom">© Maktaba Noor-ul-Ilm, Lahore. Cash on Delivery across Pakistan. Delivery charges are confirmed on WhatsApp — no amount is stated here because none was supplied.</div>
+            <div className="footer-bottom">Maktaba Noor-ul-Ilm © 2026, All Rights Reserved<br />Cash on Delivery across Pakistan · Delivery charges confirmed on WhatsApp</div>
           </footer>
-          <a className="wa-float" href="https://wa.me/923075722464" target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp">💬<span className="wa-float-text"> Chat on WhatsApp</span></a>
+          <a className="wa-float" href="https://wa.me/923075722464" target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp">💬</a>
           <BackToTop />
         </StoreProvider>
       </body>

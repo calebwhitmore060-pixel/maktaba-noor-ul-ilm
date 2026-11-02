@@ -13,7 +13,13 @@ export default function Home() {
     const sb = getSupabase();
     if (!sb) return;
     sb.from("products").select("id,name,slug,price,original_price,image_url,detail_url,category_id,featured").then(({ data, error }) => {
-      if (!error && data && data.length > 0) { setProducts(data as Product[]); }
+      if (!error && data && data.length > 0) {
+        // Live Supabase titles/prices stay, but images always use the new clean
+        // local posters (Supabase image_url still points at the old remote covers
+        // until the owner runs supabase/002_update_poster_urls.sql).
+        const posterBySlug = new Map(FALLBACK_PRODUCTS.map((f) => [f.slug, f.image_url]));
+        setProducts((data as Product[]).map((p) => ({ ...p, image_url: posterBySlug.get(p.slug) || p.image_url })));
+      }
     });
   }, []);
   const featured = products.filter((p) => p.featured);

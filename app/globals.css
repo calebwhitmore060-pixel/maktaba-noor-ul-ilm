@@ -384,8 +384,8 @@ html,body{overflow-x:hidden}
   .wa-float{left:12px;bottom:12px;right:auto;width:55px;height:55px;border-radius:50%;padding:0;display:grid;place-items:center;font-size:24px}
   .wa-float-text{display:none}
   .to-top{right:12px;bottom:12px;width:55px;height:55px}
-  /* 7. Footer stacks white on phones (already 1 column) */
-  .footer-inner{padding:28px 16px 16px}
+  /* 7. Footer stacks to a single column on phones */
+  .footer-inner{grid-template-columns:1fr;padding:28px 16px 16px}
 }
 
 /* ================= REDESIGN v4 — desktop match to reference screenshots ================= */
@@ -445,6 +445,8 @@ html,body{overflow-x:hidden}
 /* 8. White footer: thin top divider + centered copyright (divider + centering already in v3 footer rules) */
 .site-footer{border-top:3px solid var(--leaf)}
 .footer-bottom{text-align:center}
+/* Footer link columns use "»" bullets like the reference footer */
+.site-footer ul li::before{content:"» ";color:var(--leaf);font-weight:900}
 
 @media(max-width:640px){
   /* v4 mobile: keep v3 behaviour — drawer button visible, search hidden, icons row */
